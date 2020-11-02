@@ -1,3 +1,7 @@
+// DEPENDENCIES
+const fs = require("fs");
+const util = require("util");
+const writeFileAsync = util.promisify(fs.writeFile);
 
 // LOAD DATA
 
@@ -9,25 +13,41 @@ module.exports = function(app) {
   // API GET Requests
   
   app.get("/api/notes", function(req, res) {
-    res.json(notesData);
+    res.json(notesData); // Display all notes
   });
 
   // API POST Requests
-  
-
+  // Creating a new note and saving into db.json file
   app.post("/api/notes", function(req, res) {
-    // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
-    // It will do this by sending out the value "true" have a table
-    // req.body is available since we're using the body parsing middleware    
-      notesData.push(req.body);
-      res.json(req.body);
+    let newNote = req.body;
+    const lastId = notesData[notesData.length-1]["id"];
+    newNote["id"]=lastId + 1;
+    notesData.push(newNote);
+    writeFileAsync("./db/db.json", JSON.stringify(notesData)).then(function() {
+        console.log("db.json has been updated!");
+    });
+    res.json(notesData);
+
   });
 
-//   app.delete("/api/notes/:id", function(req, res) {
-//     // Empty out the arrays of data
-//     tableData.length = 0;
-//     waitListData.length = 0;
+  //Deleting a note selected by id
+  app.delete("/api/notes/:id", function(req, res) {
+    const id = parseInt(req.params.id);
 
-//     res.json({ ok: true });
-//   });
+    for (let i=0; i < notesData.length; i++){
+        if (id === notesData[i].id) { // Finding the note to be deleted.
+            notesData.splice(i,1);
+            let newContent = JSON.stringify(notesData,null,2); 
+            writeFileAsync("./db/db.json", newContent).then(function() {
+            console.log ("Note has been deleted!");
+            });
+        }
+    }
+
+   
+
+    res.json(notesData);
+  });
+
+
 };
