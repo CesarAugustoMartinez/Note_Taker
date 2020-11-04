@@ -20,7 +20,12 @@ module.exports = function(app) {
   // Creating a new note and saving into db.json file
   app.post("/api/notes", function(req, res) {
     let newNote = req.body;
-    const lastId = notesData[notesData.length-1]["id"];
+    let lastId;
+    if (notesData.length===0){ // Condition to control if the db.json is empty.
+      lastId=0;
+    }else {
+      lastId = notesData[notesData.length-1]["id"];
+    }
     newNote["id"]=lastId + 1;
     notesData.push(newNote);
     writeFileAsync("./db/db.json", JSON.stringify(notesData)).then(function() {

@@ -1,1 +1,17 @@
-[{"title":"Test Title","text":"Test text","id":1},{"title":"Helloooo","text":"Pedro","id":4},{"title":"Meeting","text":"With my brother","id":5}]
+[
+  {
+    "title": "Doctor Appointment ",
+    "text": "Friday, September 6 at 12pm. Tests results.",
+    "id": 1
+  },
+  {
+    "title": "MSW Meeting",
+    "text": "MSW meeting at 6pm on Saturday. Bring documents to sign.  ",
+    "id": 2
+  },
+  {
+    "title": "Road Biking - MD",
+    "text": "New biking route with training team. Next Sunday at 10am . ",
+    "id": 3
+  }
+]
