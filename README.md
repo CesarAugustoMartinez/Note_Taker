@@ -2,7 +2,7 @@
 
 ![picture](public/assets/images/noteTakerIndex.png)
 
-Links : [App at Heroku](https://cesaraugustomartinez.github.io/Template_Engine-Employee_Summary/video.html), [Repository](https://github.com/CesarAugustoMartinez/Note_Taker)
+Links : [Heroku App Online](https://afternoon-island-56967.herokuapp.com/), [Repository](https://github.com/CesarAugustoMartinez/Note_Taker)
 
 ---
 
